@@ -5,6 +5,9 @@ const app = express();
 // Connect to MongoDB
 connectDB();
 
+// Init Midddleware
+app.use(express.json());
+
 app.get('/', (req, res) => res.send('API Running'));
 
 // Define Routes
