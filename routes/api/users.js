@@ -5,6 +5,7 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+
 const User = require('../../models/User');
 
 // @route POST api/users
@@ -71,6 +72,7 @@ router.post(
                 payload,
                 config.get('jwtSecret'),
                 { expiresIn: 360000 },
+                // Callback function
                 (err, token) => {
                     if (err) throw err;
                     res.json({ token });
