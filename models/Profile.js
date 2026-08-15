@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const ProfileSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'user' // We got the reference from: module.exports = User = mongoose.model('user', UserSchema);
     },
     company: {
         type: String

@@ -13,7 +13,7 @@ module.exports = function (req, res, next) {
     // Verify token
     try {
         const decoded = jwt.verify(token, config.get('jwtSecret'));
-        req.user = decoded.user;
+        req.user = decoded.user; // This makes the user's ID available to profile routes through: req.user.id
         next();
     } catch (err) {
         res.status(401).json({ msg: 'Token is not valid' });
