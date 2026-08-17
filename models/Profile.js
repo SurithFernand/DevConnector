@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const ProfileSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user' // We got the reference from: module.exports = User = mongoose.model('user', UserSchema);
+        ref: 'user' // We got the reference from "module.exports = mongoose.model('user', UserSchema);" at the User model.
     },
     company: {
         type: String
@@ -110,4 +110,4 @@ const ProfileSchema = new mongoose.Schema({
     }
 });
 
-module.exports = Profile = mongoose.model('profile', ProfileSchema);
+module.exports = mongoose.model('profile', ProfileSchema);
