@@ -94,7 +94,7 @@ router.delete('/:id', auth, async (req, res) => {
         }
 
         // Delete post
-        await post.remove();
+        await post.deleteOne();
 
         res.json({ msg: 'Post removed' });
     } catch (err) {
