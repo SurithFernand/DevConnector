@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+    mongo:
+        image: mongo:latest
+        container_name: devconnector-mongo
+        restart: always
+        environment:
+            MONGO_INITDB_DATABASE: devconnector
+        volumes:
+            - mongo-data:/data/db
+        networks:
+            - devconnector-net
+
+    backend:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: devconnector-backend
+        restart: always
+        environment:
+            - PORT=5000
+            - MONGO_URI=mongodb://mongo:27017/devconnector
+            - NODE_ENV=production
+        depends_on:
+            - mongo
+        networks:
+            - devconnector-net
+
+    frontend:
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        container_name: devconnector-frontend
+        restart: always
+        ports:
+            - '80:80'
+        depends_on:
+            - backend
+        networks:
+            - devconnector-net
+
+volumes:
+    mongo-data:
+
+networks:
+    devconnector-net:
+        driver: bridge
